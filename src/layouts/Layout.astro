@@ -1,0 +1,139 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+}
+
+const { title = "The Wedding of Adam & Hawa" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<!-- AOS (Animate On Scroll) -->
+		<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+	</head>
+	<body class="lock-scroll bg-gradient-to-b from-[#F5EBE0] via-[#FAF6ED] to-[#EFE3D3] text-[#4A3525] antialiased selection:bg-[#8C6D53]/20 selection:text-[#4A3525] relative min-h-screen">
+		
+		<!-- 1. BACKGROUND LAYER (bgbunga.png) -->
+		<!-- Mobile: Vertikal ( rotate 0deg ), Desktop/Laptop: Horizontal ( rotate 90deg ) -->
+		<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
+			<!-- Mobile Version (Vertikal) -->
+			<img 
+				src="/image/bgbunga.png" 
+				alt="Background Bunga Mobile" 
+				class="block md:hidden absolute inset-0 w-full h-full object-cover opacity-40 min-h-screen"
+			/>
+			<!-- Desktop / Laptop Version (Horizontal - Rotated 90 degrees) -->
+			<div class="hidden md:flex absolute inset-0 items-center justify-center">
+				<img 
+					src="/image/bgbunga.png" 
+					alt="Background Bunga Desktop" 
+					class="w-[100vh] h-[100vw] max-w-none object-cover opacity-50 rotate-90 scale-125 transition-transform duration-500"
+				/>
+			</div>
+			<!-- Rich Warm Cream Overlay Gradient for optimal contrast & warm luxury tone -->
+			<div class="absolute inset-0 bg-gradient-to-b from-[#FAF4EA]/45 via-[#F3E7D3]/40 to-[#EADBC4]/50 backdrop-blur-[0.3px]"></div>
+			<!-- Desktop Radial Vignette for rich depth -->
+			<div class="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_35%,_rgba(218,198,171,0.3)_100%)] pointer-events-none"></div>
+		</div>
+
+		<!-- COVER CORNER FLOWERS — fixed, tidak ikut scroll cover -->
+		<div id="cover-flowers" class="fixed inset-0 z-45 pointer-events-none select-none overflow-hidden">
+			<!-- Pojok kiri atas -->
+			<img src="/image/sudut_bunga.png" alt=""
+				class="flower-corner-tl absolute -top-2 -left-2 w-28 sm:w-40 md:w-52 h-auto opacity-90"
+				style="animation-delay:0s" />
+			<!-- Pojok kanan atas -->
+			<img src="/image/sudut_bunga.png" alt=""
+				class="flower-corner-tr absolute -top-2 -right-2 w-28 sm:w-40 md:w-52 h-auto opacity-90"
+				style="animation-delay:0.2s" />
+			<!-- Pojok kiri bawah -->
+			<img src="/image/sudut_bunga.png" alt=""
+				class="flower-corner-bl absolute -bottom-2 -left-2 w-28 sm:w-40 md:w-52 h-auto opacity-90"
+				style="animation-delay:0.15s" />
+			<!-- Pojok kanan bawah -->
+			<img src="/image/sudut_bunga.png" alt=""
+				class="flower-corner-br absolute -bottom-2 -right-2 w-28 sm:w-40 md:w-52 h-auto opacity-90"
+				style="animation-delay:0.3s" />
+		</div>
+
+		<!-- 2. MAIN CONTENT SLOT -->
+		<div class="relative z-10">
+			<slot />
+		</div>
+
+		<!-- FLASH OVERLAY — dipicu saat tombol buka undangan ditekan -->
+		<div id="flash-overlay" class="fixed inset-0 z-50 pointer-events-none"
+			style="opacity:0; background: radial-gradient(circle at center, #fff9f0 0%, #f5e6cc 40%, transparent 70%); display:none;">
+		</div>
+
+	</body>
+	<!-- AOS Init -->
+	<script src="https://unpkg.com/aos@2.3.4/dist/aos.js" is:inline></script>
+	<script is:inline>
+		// AOS tidak di-init di sini. Init dikendalikan dari index.astro
+	</script>
+
+	<style>
+		@keyframes cornerZoomIn {
+			0%   { opacity: 0; transform: scale(0.3); }
+			60%  { opacity: 1; transform: scale(1.08); }
+			80%  { transform: scale(0.97); }
+			100% { opacity: 1; transform: scale(1); }
+		}
+		@keyframes floatNormal {
+			0%,100% { transform: translateY(0px) rotate(0deg); }
+			40%     { transform: translateY(-7px) rotate(1.5deg); }
+			70%     { transform: translateY(-3px) rotate(-1deg); }
+		}
+		@keyframes floatMirrorX {
+			0%,100% { transform: scaleX(-1) translateY(0px) rotate(0deg); }
+			40%     { transform: scaleX(-1) translateY(-7px) rotate(-1.5deg); }
+			70%     { transform: scaleX(-1) translateY(-3px) rotate(1deg); }
+		}
+		@keyframes floatMirrorY {
+			0%,100% { transform: scaleY(-1) translateY(0px) rotate(0deg); }
+			40%     { transform: scaleY(-1) translateY(-7px) rotate(1.5deg); }
+			70%     { transform: scaleY(-1) translateY(-3px) rotate(-1deg); }
+		}
+		@keyframes floatMirrorXY {
+			0%,100% { transform: scaleX(-1) scaleY(-1) translateY(0px); }
+			50%     { transform: scaleX(-1) scaleY(-1) translateY(-6px); }
+		}
+
+		#cover-flowers .flower-corner-tl {
+			opacity: 0;
+			animation: cornerZoomIn 1.8s cubic-bezier(0.34,1.56,0.64,1) forwards,
+			           floatNormal 5s ease-in-out 2s infinite;
+		}
+		#cover-flowers .flower-corner-tr {
+			transform: scaleX(-1);
+			opacity: 0;
+			animation: cornerZoomIn 1.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s forwards,
+			           floatMirrorX 5s ease-in-out 2.2s infinite;
+		}
+		#cover-flowers .flower-corner-bl {
+			transform: scaleY(-1);
+			opacity: 0;
+			animation: cornerZoomIn 1.8s cubic-bezier(0.34,1.56,0.64,1) 0.15s forwards,
+			           floatMirrorY 5.5s ease-in-out 2.1s infinite;
+		}
+		#cover-flowers .flower-corner-br {
+			transform: scaleX(-1) scaleY(-1);
+			opacity: 0;
+			animation: cornerZoomIn 1.8s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards,
+			           floatMirrorXY 5.5s ease-in-out 2.3s infinite;
+		}
+	</style>
+</html>
+

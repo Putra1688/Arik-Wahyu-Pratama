@@ -1,0 +1,160 @@
+---
+// src/components/EventSection.astro
+const googleMapsUrl = "https://maps.google.com/?q=Pondok+Pesantren+Anwarul+Huda+Malang";
+---
+
+<section id="acara" class="py-16 sm:py-24 px-4 bg-gradient-to-b from-[#F2E6D4]/80 via-[#FAF4EA]/85 to-[#F5EBE0]/80 relative overflow-hidden">
+  <!-- Section Corner & Side Ornaments -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+    <!-- Sudut Kiri Atas -->
+    <span class="absolute -top-3 -left-3" data-aos="zoom-in" data-aos-delay="0">
+      <img src="/image/sudut_bunga.png" alt="Dekorasi Bunga Kiri Atas"
+        class="w-32 sm:w-48 md:w-60 lg:w-72 h-auto object-contain drop-shadow-md opacity-90 pointer-events-none select-none" />
+    </span>
+    <!-- Sudut Kanan Atas -->
+    <span class="absolute -top-3 -right-3" data-aos="zoom-in" data-aos-delay="100">
+      <img src="/image/sudut_bunga.png" alt="Dekorasi Bunga Kanan Atas"
+        class="w-32 sm:w-48 md:w-60 lg:w-72 h-auto object-contain drop-shadow-md opacity-90 scale-x-[-1] pointer-events-none select-none" />
+    </span>
+
+    <!-- Bunga Bingkai Side Ornaments Kanan & Kiri Section Event (menempel di dinding) -->
+    <span class="absolute top-1/2 -translate-y-1/2 -left-10 sm:-left-14 lg:-left-16 opacity-90 pointer-events-none select-none" data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="200">
+      <img src="/image/bunga_bingkai.png" alt="Bunga Kiri" class="w-32 sm:w-44 md:w-52 lg:w-60 h-auto object-contain animate-sway drop-shadow-lg" />
+    </span>
+    <span class="absolute top-1/2 -translate-y-1/2 -right-10 sm:-right-14 lg:-right-16 opacity-90 pointer-events-none select-none" data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="300">
+      <img src="/image/bunga_bingkai.png" alt="Bunga Kanan" class="w-32 sm:w-44 md:w-52 lg:w-60 h-auto object-contain animate-sway drop-shadow-lg scale-x-[-1]" />
+    </span>
+
+    <!-- Bunga Bingkai Ornaments (Bawah Section Event) -->
+    <span class="absolute -bottom-4 -left-4 opacity-85 pointer-events-none select-none" data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="250">
+      <img src="/image/bunga_bingkai.png" alt="Bunga Bingkai Kiri" class="w-36 sm:w-48 md:w-56 lg:w-64 h-auto object-contain animate-sway drop-shadow-md" />
+    </span>
+    <span class="absolute -bottom-4 -right-4 opacity-85 pointer-events-none select-none" data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="350">
+      <img src="/image/bunga_bingkai.png" alt="Bunga Bingkai Kanan" class="w-36 sm:w-48 md:w-56 lg:w-64 h-auto object-contain animate-sway drop-shadow-md scale-x-[-1]" />
+    </span>
+  </div>
+
+  <div class="max-w-4xl mx-auto text-center space-y-12 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="space-y-2">
+      <span class="text-xs uppercase tracking-[0.3em] text-[#8C6D53] font-bold">Waktu & Tempat</span>
+      <h2 class="font-serif-wedding text-3xl sm:text-5xl text-[#4A3525] font-semibold">Rangkaian Acara Pernikahan</h2>
+      <div class="w-20 h-0.5 bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent mx-auto"></div>
+    </div>
+
+    <!-- Event Cards Grid (Akad & Resepsi Memakai Card) -->
+    <div class="grid md:grid-cols-2 gap-8 pt-4">
+      
+      <!-- Akad Nikah Card -->
+      <div class="p-8 rounded-3xl bg-white/95 border border-[#E5DCC5] shadow-lg shadow-[#6E4F38]/10 space-y-5 text-center flex flex-col justify-between hover:border-[#8C6D53]/40 transition-colors relative overflow-hidden">
+        <!-- Card Corner Ornaments -->
+        <span class="absolute -top-4 -left-4" data-aos="zoom-in">
+          <img src="/image/sudut_bunga.png" alt="Ornamen Bunga" class="w-24 sm:w-32 md:w-36 h-auto opacity-85 pointer-events-none select-none" />
+        </span>
+        <span class="absolute -bottom-4 -right-4" data-aos="zoom-in" data-aos-delay="150">
+          <img src="/image/sudut_bunga.png" alt="Ornamen Bunga" class="w-24 sm:w-32 md:w-36 h-auto opacity-85 pointer-events-none select-none scale-x-[-1] scale-y-[-1]" />
+        </span>
+
+        <div class="space-y-4 relative z-10">
+          <div class="w-14 h-14 rounded-2xl bg-[#FAF6ED] border border-[#E5DCC5] mx-auto flex items-center justify-center text-[#7A5C43]">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-serif-wedding text-xl sm:text-xl text-[#4A3525] font-bold">Akad Nikah</h3>
+            <p class="text-xs text-[#8C6D53] font-semibold tracking-wider uppercase mt-1">Sabtu, 14 November 2026</p>
+          </div>
+
+          <div class="w-16 h-px bg-[#E5DCC5] mx-auto"></div>
+
+          <div class="space-y-2 text-sm text-[#594433]">
+            <p class="font-semibold text-[#4A3525] text-xs sm:text-sm">🕒 Pukul 18:30 (Ba'da Isya) - Selesai</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resepsi Pernikahan -->
+      <div class="p-8 rounded-3xl bg-white/95 border border-[#E5DCC5] shadow-lg shadow-[#6E4F38]/10 space-y-5 text-center flex flex-col justify-between hover:border-[#8C6D53]/40 transition-colors relative overflow-hidden">
+        <!-- Card Corner Ornaments -->
+        <span class="absolute -top-4 -left-4" data-aos="zoom-in">
+          <img src="/image/sudut_bunga.png" alt="Ornamen Bunga" class="w-24 sm:w-32 md:w-36 h-auto opacity-85 pointer-events-none select-none" />
+        </span>
+        <span class="absolute -bottom-4 -right-4" data-aos="zoom-in" data-aos-delay="150">
+          <img src="/image/sudut_bunga.png" alt="Ornamen Bunga" class="w-24 sm:w-32 md:w-36 h-auto opacity-85 pointer-events-none select-none scale-x-[-1] scale-y-[-1]" />
+        </span>
+
+        <div class="space-y-4 relative z-10">
+          <div class="w-14 h-14 rounded-2xl bg-[#FAF6ED] border border-[#E5DCC5] mx-auto flex items-center justify-center text-[#7A5C43]">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-serif-wedding text-xl sm:text-xl text-[#4A3525] font-bold">Resepsi Pernikahan</h3>
+            <p class="text-xs text-[#8C6D53] font-semibold tracking-wider uppercase mt-1">Ahad, 15 November 2026</p>
+          </div>
+
+          <div class="w-16 h-px bg-[#E5DCC5] mx-auto"></div>
+
+          <div class="space-y-2 text-sm text-[#594433]">
+            <p class="font-semibold text-[#4A3525] text-xs sm:text-sm">🕒 Pukul 18:30 (Ba'da Isya) - Selesai</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unduh Mantu Card -->
+      <div class="p-8 rounded-3xl bg-white/95 border border-[#E5DCC5] shadow-lg shadow-[#6E4F38]/10 space-y-5 text-center flex flex-col justify-between hover:border-[#8C6D53]/40 transition-colors relative overflow-hidden">
+        <!-- Card Corner Ornaments -->
+        <span class="absolute -top-4 -left-4" data-aos="zoom-in">
+          <img src="/image/sudut_bunga.png" alt="Ornamen Bunga" class="w-24 sm:w-32 md:w-36 h-auto opacity-85 pointer-events-none select-none" />
+        </span>
+        <span class="absolute -bottom-4 -right-4" data-aos="zoom-in" data-aos-delay="150">
+          <img src="/image/sudut_bunga.png" alt="Ornamen Bunga" class="w-24 sm:w-32 md:w-36 h-auto opacity-85 pointer-events-none select-none scale-x-[-1] scale-y-[-1]" />
+        </span>
+
+        <div class="space-y-4 relative z-10">
+          <div class="w-14 h-14 rounded-2xl bg-[#FAF6ED] border border-[#E5DCC5] mx-auto flex items-center justify-center text-[#7A5C43]">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0v-4a1 1 0 011-1h2a1 1 0 011 1v4"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-serif-wedding text-3xl text-[#4A3525] font-bold">Unduh Mantu</h3>
+            <p class="text-xs text-[#8C6D53] font-semibold tracking-wider uppercase mt-1">Ahad, 21 November 2026</p>
+          </div>
+
+          <div class="w-16 h-px bg-[#E5DCC5] mx-auto"></div>
+
+          <div class="space-y-2 text-sm text-[#594433]">
+            <p class="font-semibold text-[#4A3525]">🕒 Pukul 13:00 - 17.00</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Unified Location Info & Action Buttons (Tanpa Card Div) -->
+    <div class="space-y-6 text-center max-w-2xl mx-auto pt-6">
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+        <!-- Add to Calendar -->
+        <a 
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Arik+%26+Monica&dates=20261114T113000Z/20261115T090000Z&details=Pernikahan+Arik+%26+Monica&location=Pondok+Pesantren+Anwarul+Huda+Malang" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#FAF6ED] hover:bg-[#EFE6D5] text-[#6E4F38] text-xs sm:text-sm font-semibold border border-[#E5DCC5] transition-all duration-300 hover:scale-105 shadow-sm w-full sm:w-auto"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span>Simpan Tanggal (Google Calendar)</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+

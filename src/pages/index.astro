@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import CoverSection from '../components/CoverSection.astro';
+import CoupleSection from '../components/CoupleSection.astro';
+import EventSection from '../components/EventSection.astro';
+import LocationSection from '../components/LocationSection.astro';
+import GiftSection from '../components/GiftSection.astro';
+import FooterSection from '../components/FooterSection.astro';
+
+// Target tanggal pernikahan (contoh: 12 Desember 2026 09:00:00)
+const weddingDate = "2026-11-21T18:30:00";
+const groomName = "Arik";
+const brideName = "Dania";
+---
+
+<Layout title={`Undangan Pernikahan - ${brideName} & ${groomName}`}>
+  
+  <!-- NAVBAR (FLOATING & HIDDEN UNTIL COVER IS UNLOCKED) -->
+  <Navbar />
+
+  <!-- COVER / HERO SECTION (MODULAR COMPONENT) -->
+  <CoverSection brideName={brideName} groomName={groomName}  />
+
+  <!-- MAIN CONTENT SECTION (ACCESSIBLE AFTER UNLOCKING COVER) -->
+  <main id="main-content" class="hidden min-h-screen bg-gradient-to-b from-[#FAF4EA]/70 via-[#F3E7D3]/50 to-[#EADBC4]/70 backdrop-blur-[1px] relative">
+    
+    <!-- 1. Acara Pernikahan & Mempelai -->
+    <CoupleSection brideName={brideName} groomName={groomName}  />
+
+    <!-- 3. Rangkaian Acara (Akad & Resepsi) -->
+    <EventSection />
+
+    <!-- 4. Lokasi & Barcode Maps -->
+    <LocationSection />
+
+    <!-- 5. Amplop Digital & Gift -->
+    <!-- <GiftSection /> -->
+
+    <!-- 6. Footer & Ucapan Terima Kasih -->
+    <FooterSection brideName={brideName} groomName={groomName}  />
+
+  </main>
+</Layout>
+
+<script is:inline define:vars={{ weddingDate }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    // ── GUEST NAME dari URL ?to= ──
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestParam = urlParams.get('to');
+    const guestBlock = document.getElementById('guest-block');
+    const guestNameDisplay = document.getElementById('guest-name-display');
+
+    if (guestParam && guestParam.trim() !== '') {
+      const guestName = decodeURIComponent(guestParam.replace(/\+/g, ' ')).trim();
+      if (guestNameDisplay) guestNameDisplay.textContent = guestName;
+      if (guestBlock) {
+        guestBlock.classList.remove('hidden');
+        // Trigger animasi setelah unhide (butuh 1 frame)
+        requestAnimationFrame(() => guestBlock.classList.add('show'));
+      }
+    }
+    // Jika tidak ada param: guestBlock tetap hidden (default)
+    // Audio & Navbar Unlock Logic
+    const btnOpen = document.getElementById('btn-open-invitation');
+    const coverScreen = document.getElementById('cover-screen');
+    const mainContent = document.getElementById('main-content');
+    const navbar = document.getElementById('navbar');
+    const weddingAudio = document.getElementById('wedding-audio');
+    const btnAudio = document.getElementById('btn-audio');
+    const iconPlaying = document.getElementById('icon-music-playing');
+    const iconPaused = document.getElementById('icon-music-paused');
+
+    let isAudioPlaying = false;
+
+    function toggleAudio() {
+      if (!weddingAudio) return;
+      if (isAudioPlaying) {
+        weddingAudio.pause();
+        isAudioPlaying = false;
+        if (iconPlaying) iconPlaying.classList.add('hidden');
+        if (iconPaused) iconPaused.classList.remove('hidden');
+      } else {
+        weddingAudio.play().then(() => {
+          isAudioPlaying = true;
+          if (iconPlaying) iconPlaying.classList.remove('hidden');
+          if (iconPaused) iconPaused.classList.add('hidden');
+        }).catch(err => console.log('Audio autoplay policy:', err));
+      }
+    }
+
+    if (btnAudio) {
+      btnAudio.addEventListener('click', toggleAudio);
+    }
+
+    if (btnOpen && coverScreen) {
+      btnOpen.addEventListener('click', () => {
+        const flash = document.getElementById('flash-overlay');
+
+        // 1. Tampilkan main content di background (tersembunyi di balik cover)
+        document.body.classList.remove('lock-scroll');
+        if (mainContent) mainContent.classList.remove('hidden');
+
+        // 2. Mulai audio
+        toggleAudio();
+
+        // 3. FLASH — expand dari tengah, putih bersinar
+        if (flash) {
+          flash.style.display = 'block';
+          flash.style.transition = 'none';
+          flash.style.opacity = '0';
+          flash.style.transform = 'scale(0.3)';
+
+          // Frame berikutnya: trigger expand + brighten
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              flash.style.transition = 'opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+              flash.style.opacity = '1';
+              flash.style.transform = 'scale(3)';
+            });
+          });
+        }
+
+        // 4. Saat flash puncak (0.6s) — sembunyikan cover, tampilkan navbar
+        setTimeout(() => {
+          coverScreen.style.display = 'none';
+
+          // Sembunyikan fixed corner flowers
+          const coverFlowers = document.getElementById('cover-flowers');
+          if (coverFlowers) coverFlowers.style.display = 'none';
+
+          if (navbar) {
+            navbar.classList.remove('hidden');
+            setTimeout(() => navbar.classList.remove('opacity-0'), 50);
+          }
+
+          // Init AOS
+          if (typeof AOS !== 'undefined') {
+            AOS.init({
+              duration: 2000,
+              easing: 'ease-out-cubic',
+              once: true,
+              offset: 20,
+              anchorPlacement: 'top-bottom',
+            });
+            AOS.refreshHard();
+          }
+
+          if (mainContent) mainContent.scrollIntoView({ behavior: 'instant' });
+        }, 600);
+
+        // 5. Flash fade out — sinar menghilang perlahan setelah 1s di puncak
+        setTimeout(() => {
+          if (flash) {
+            flash.style.transition = 'opacity 1.2s ease-in';
+            flash.style.opacity = '0';
+          }
+        }, 700);
+
+        // 6. Bersihkan flash setelah selesai
+        setTimeout(() => {
+          if (flash) flash.style.display = 'none';
+        }, 1950);
+      });
+    }
+  });
+</script>
